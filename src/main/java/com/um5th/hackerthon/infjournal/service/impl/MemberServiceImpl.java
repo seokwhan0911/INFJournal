@@ -33,10 +33,16 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public Member signIn(SignInRequestDto request) {
         Member member = memberRepository.findByNickname(request.getNickname()).orElseThrow(() -> new MemberException(MemberCode.MEMBER_NOT_FOUND));
 
         return member;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Member findMemberById(Long memberId) {
+        return memberRepository.findById(memberId).orElseThrow(() -> new MemberException(MemberCode.MEMBER_NOT_FOUND));
     }
 }

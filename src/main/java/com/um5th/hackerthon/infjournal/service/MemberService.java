@@ -11,4 +11,6 @@ public interface MemberService {
     Member createMember(SignUpRequestDto request);
 
     Member signIn(SignInRequestDto request);
+
+    Member findMemberById(Long memberId);
 }
