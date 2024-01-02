@@ -5,8 +5,9 @@ import com.um5th.hackerthon.infjournal.domain.enums.MoodType;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity
+@Entity(name="essay")
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -18,6 +19,9 @@ public class Essay extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "VARCHAR(10)")
     private MoodType moodType;
+
+    @Column(nullable = false, length = 100)
+    private String title;
 
     @Column(nullable = false, length = 500)
     private String contents;
