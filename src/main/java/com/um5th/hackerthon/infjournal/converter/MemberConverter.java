@@ -1,6 +1,7 @@
 package com.um5th.hackerthon.infjournal.converter;
 
 import com.um5th.hackerthon.infjournal.controller.dto.request.MemberRequestDto.SignUpRequestDto;
+import com.um5th.hackerthon.infjournal.controller.dto.response.MemberResponseDto.SignInResponseDto;
 import com.um5th.hackerthon.infjournal.controller.dto.response.MemberResponseDto.SignUpResponseDto;
 import com.um5th.hackerthon.infjournal.domain.Member;
 import com.um5th.hackerthon.infjournal.domain.mapping.TodayTopic;
@@ -25,5 +26,11 @@ public class MemberConverter {
         member.getTodayTopic().setMember(member);
 
         return member;
+    }
+
+    public static SignInResponseDto toSignInResponseDto(Member member) {
+        return SignInResponseDto.builder()
+                                .userId(member.getId())
+                                .build();
     }
 }

@@ -17,4 +17,13 @@ public class MemberRequestDto {
         @Schema(description = "사용자 닉네임", example = "보노")
         private String nickname;
     }
+
+    @Getter
+    @Setter
+    public static class SignInRequestDto {
+
+        @NotBlank
+        @Schema(description = "사용자 닉네임", example = "보노")
+        private String nickname;
+    }
 }
