@@ -13,6 +13,7 @@ import com.um5th.hackerthon.infjournal.domain.Essay;
 import com.um5th.hackerthon.infjournal.domain.Member;
 import com.um5th.hackerthon.infjournal.service.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -56,7 +57,8 @@ public class MemberController {
 
     @GetMapping("/me/inbox/essays")
     @Operation(summary = "내 우체통 리스트 API", description = "랜덤으로 발송된 에세이를 조회합니다.")
-    public ResponseEntity<BaseResponseDto<List<InboxEssayPreviewResponseDto>>> getInboxEssays(@ExtractMember Member member) {
+    public ResponseEntity<BaseResponseDto<List<InboxEssayPreviewResponseDto>>> getInboxEssays(
+        @Parameter(hidden = true) @ExtractMember Member member) {
         List<Essay> essays = memberService.getInboxEssays(member);
 
         return ResponseEntity.status(CommonCode.OK.getHttpStatus())
