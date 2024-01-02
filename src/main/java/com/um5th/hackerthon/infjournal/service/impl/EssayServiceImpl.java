@@ -1,6 +1,9 @@
 package com.um5th.hackerthon.infjournal.service.impl;
 
+import com.um5th.hackerthon.infjournal.apiPayload.code.EssayCode;
+import com.um5th.hackerthon.infjournal.apiPayload.exception.handler.EssayHandler;
 import com.um5th.hackerthon.infjournal.controller.dto.request.EssayRequestDTO;
+import com.um5th.hackerthon.infjournal.controller.dto.response.EssayResponseDTO;
 import com.um5th.hackerthon.infjournal.converter.EssayConverter;
 import com.um5th.hackerthon.infjournal.domain.Essay;
 import com.um5th.hackerthon.infjournal.domain.Member;
@@ -28,7 +31,9 @@ public class EssayServiceImpl implements EssayService {
         return essayRepository.save(newEssay);
     }
 
-
-
-
+    @Override
+    public Essay getEssay(Long essayId) {
+        Essay essay = essayRepository.findById(essayId).orElseThrow(() -> new EssayHandler(EssayCode.ESSAY_NOT_FOUND));
+        return essay;
+    }
 }
