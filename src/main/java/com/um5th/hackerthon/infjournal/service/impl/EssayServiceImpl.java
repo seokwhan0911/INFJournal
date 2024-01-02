@@ -8,27 +8,29 @@ import com.um5th.hackerthon.infjournal.domain.Topic;
 import com.um5th.hackerthon.infjournal.repository.EssayRepository;
 import com.um5th.hackerthon.infjournal.repository.TopicRepository;
 import com.um5th.hackerthon.infjournal.service.EssayService;
+import com.um5th.hackerthon.infjournal.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class EssayServiceImpl implements EssayService {
+
     private final EssayRepository essayRepository;
     private final TopicRepository topicRepository;
+    private final MemberService memberService;
 
 
     @Override
     public Essay writeEssay(EssayRequestDTO.EssayDto request, Member member) {
         Topic topic = topicRepository.findById(request.getTopicId()).orElseThrow(() -> new RuntimeException());
         Essay newEssay = EssayConverter.toEssay(request, topic, member);
-        return essayRepository.save(newEssay);
+
+        newEssay = essayRepository.save(newEssay);
+        memberService.sendEssayToRandomMember(newEssay);
+
+        return newEssay;
     }
-
-
 
 
 }
