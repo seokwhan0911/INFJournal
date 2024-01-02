@@ -34,6 +34,7 @@ public class LikeController {
     public ResponseEntity<BaseResponseDto<LikeResponseDTO.insertLike>> insertLike(@Parameter(hidden = true) @ExtractMember Member member,
         @PathVariable(name = "essayId") @Parameter(description = "좋아요할 에세이 아이디", example = "1") Long essayId) {
         EssayLike newEssayLike = likeService.insertLike(member, essayId);
+        //nteger likeCnt = likeService.countLike(essayId);
         return ResponseEntity.status(CommonCode.CREATED.getHttpStatus())
                              .body(BaseResponseDto.of(CommonCode.CREATED,
                                  EssayLikeConverter.toEssayLikeResDTO(newEssayLike)));

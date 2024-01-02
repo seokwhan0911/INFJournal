@@ -52,6 +52,7 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
     @ExceptionHandler
     public ResponseEntity<Object> anyException(Exception e, WebRequest request) {
         e.printStackTrace();
+
         return handleExceptionInternalFalse(e, CommonCode.INTERNAL_ERROR, HttpHeaders.EMPTY, request);
     }
 

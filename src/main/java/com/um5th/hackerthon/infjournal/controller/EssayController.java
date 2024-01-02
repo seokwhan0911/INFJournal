@@ -16,6 +16,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,4 +42,25 @@ public class EssayController {
             .body(BaseResponseDto.of(CommonCode.CREATED, EssayConverter.toWriteResultDTO(essay)));
     }
 
+    @Operation(summary = "에세이 상세조회 API")
+    @GetMapping("/essays/{essayId}")
+    public ResponseEntity<BaseResponseDto<EssayResponseDTO.readEssayDTO>> readEssay(@PathVariable(name = "essayId") Long essayId) {
+        Essay essay = essayService.getEssay(essayId);
+        return ResponseEntity.status(CommonCode.OK.getHttpStatus())
+                .body(BaseResponseDto.of(CommonCode.OK, EssayConverter.toReadEssayResDTO(essay)));
+    }
+
+
+    @Operation(summary = "에세이 등록 API", description = "에세이 글쓰기 ")
+    @ApiResponse(responseCode = "201")
+    @GetMapping("/me/essays")
+    public ResponseEntity<BaseResponseDto<List<EssayResponseDTO.MyEssayDTO>>> getMyEssays(@Parameter(hidden = true) @ExtractMember Member member) {
+
+        List<Essay> listEssay = essayService.getMyEssay(member);
+
+        return ResponseEntity.status(CommonCode.OK.getHttpStatus())
+                .body(BaseResponseDto.of(EssayConverter.toMyEssayDtoList(listEssay, member)));
+
+
+    }
 }

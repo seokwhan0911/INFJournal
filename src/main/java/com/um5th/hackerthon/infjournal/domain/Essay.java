@@ -54,7 +54,7 @@ public class Essay extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "topic")
     private Topic topic;
-
+  
     @OneToMany(mappedBy = "essay", cascade = CascadeType.ALL)
     List<EssayLike> essayLikes = new ArrayList<>();
 

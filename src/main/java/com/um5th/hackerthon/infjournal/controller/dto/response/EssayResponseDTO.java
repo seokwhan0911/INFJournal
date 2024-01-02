@@ -1,10 +1,12 @@
 package com.um5th.hackerthon.infjournal.controller.dto.response;
 
-import io.swagger.v3.oas.annotations.media.Schema;
+import com.um5th.hackerthon.infjournal.domain.Essay;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 public class EssayResponseDTO {
 
@@ -18,6 +20,29 @@ public class EssayResponseDTO {
         Long essayId;
         Long userId;
     }
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class MyEssayDTO{
+        Long essayId;
+        Long topicId;
+        String title;
+        String contents;
+        String moodType;
+        Integer likeCnt;
+    }
 
 
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class readEssayDTO {
+        Long essayId;
+        String title;
+        String contents;
+        String nickname;
+        String moodType;
+    }
 }
