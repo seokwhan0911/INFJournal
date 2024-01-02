@@ -17,4 +17,6 @@ public interface MemberService {
     Member findMemberById(Long memberId);
 
     List<Essay> getInboxEssays(Member member);
+
+    void sendEssayToRandomMember(Essay essay);
 }
