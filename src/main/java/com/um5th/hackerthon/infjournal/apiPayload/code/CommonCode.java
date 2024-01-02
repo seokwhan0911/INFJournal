@@ -12,6 +12,7 @@ public enum CommonCode implements BaseCode {
 
     INTERNAL_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "SERVER_ERROR", "서버 에러! 담당자에게 문의하세요."),
     BAD_REQUEST(HttpStatus.BAD_REQUEST, "COMM_003", "요청 방식 에러, result를 확인하세요."),
+    AUTH_HEADER_INVALID(HttpStatus.UNAUTHORIZED, "COMM_004", "Authorization 헤더가 적절한 값이 아닙니다."),
     ;
 
     private final HttpStatus httpStatus;
