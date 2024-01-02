@@ -76,7 +76,7 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
 
     private ResponseEntity<Object> handleExceptionInternalFalse(Exception e, BaseCode code,
         HttpHeaders headers, WebRequest request) {
-        BaseResponseDto<Object> body = BaseResponseDto.onFailure(code, null);
+        BaseResponseDto<Object> body = BaseResponseDto.onFailure(code, e.getMessage());
         return super.handleExceptionInternal(
             e,
             body,

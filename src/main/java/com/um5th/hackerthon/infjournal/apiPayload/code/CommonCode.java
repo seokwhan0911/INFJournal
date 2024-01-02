@@ -11,6 +11,7 @@ public enum CommonCode implements BaseCode {
     CREATED(HttpStatus.CREATED, "COMM_002", "요청 성공 및 리소스 생성됨"),
 
     INTERNAL_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "SERVER_ERROR", "서버 에러! 담당자에게 문의하세요."),
+    BAD_REQUEST(HttpStatus.BAD_REQUEST, "COMM_003", "요청 방식 에러, result를 확인하세요."),
     ;
 
     private final HttpStatus httpStatus;
