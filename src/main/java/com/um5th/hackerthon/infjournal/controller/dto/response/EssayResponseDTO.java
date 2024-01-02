@@ -31,4 +31,15 @@ public class EssayResponseDTO {
     }
 
 
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class readEssayDTO {
+        Long essayId;
+        String title;
+        String contents;
+        String nickname;
+        String moodType;
+    }
 }

@@ -12,15 +12,10 @@ import com.um5th.hackerthon.infjournal.service.EssayService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.swing.text.html.parser.Entity;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -38,6 +33,13 @@ public class EssayController {
                 .body(BaseResponseDto.of(CommonCode.CREATED, EssayConverter.toWriteResultDTO(essay)));
     }
 
+    @Operation(summary = "에세이 상세조회 API")
+    @GetMapping("/essays/{essayId}")
+    public ResponseEntity<BaseResponseDto<EssayResponseDTO.readEssayDTO>> readEssay(@PathVariable(name = "essayId") Long essayId) {
+        Essay essay = essayService.getEssay(essayId);
+        return ResponseEntity.status(CommonCode.OK.getHttpStatus())
+                .body(BaseResponseDto.of(CommonCode.OK, EssayConverter.toReadEssayResDTO(essay)));
+    }
 
 
     @Operation(summary = "에세이 등록 API", description = "에세이 글쓰기 ")

@@ -40,6 +40,16 @@ public class EssayConverter {
                 .build();
     }
 
+    public static EssayResponseDTO.readEssayDTO toReadEssayResDTO(Essay essay) {
+       return EssayResponseDTO.readEssayDTO.builder()
+               .essayId(essay.getId())
+               .title(essay.getTitle())
+               .contents(essay.getContents())
+               .nickname(essay.getMember().getNickname())
+               .moodType(String.valueOf(essay.getMoodType()))
+               .build();
+    }
+
     private static EssayResponseDTO.MyEssayDTO myEssayDTO(Essay essay, Member member){
 
         return EssayResponseDTO.MyEssayDTO.builder()

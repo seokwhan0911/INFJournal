@@ -1,5 +1,7 @@
 package com.um5th.hackerthon.infjournal.service.impl;
 
+import com.um5th.hackerthon.infjournal.apiPayload.code.EssayCode;
+import com.um5th.hackerthon.infjournal.apiPayload.exception.handler.EssayHandler;
 import com.um5th.hackerthon.infjournal.apiPayload.exception.BaseException;
 import com.um5th.hackerthon.infjournal.controller.dto.request.EssayRequestDTO;
 import com.um5th.hackerthon.infjournal.controller.dto.response.EssayResponseDTO;
@@ -26,8 +28,8 @@ public class EssayServiceImpl implements EssayService {
     private final TopicRepository topicRepository;
     private final EssayLikeRepository essayLikeRepository;
     private final MemberService memberService;
-  
-  
+
+
   @Override
     public List<Essay> getMyEssay(Member member) throws BaseException {
         List<Essay> essay = essayRepository.findAllByMember(member);
@@ -45,5 +47,11 @@ public class EssayServiceImpl implements EssayService {
         memberService.sendEssayToRandomMember(newEssay);
 
         return newEssay;
+    }
+
+    @Override
+    public Essay getEssay(Long essayId) {
+        Essay essay = essayRepository.findById(essayId).orElseThrow(() -> new EssayHandler(EssayCode.ESSAY_NOT_FOUND));
+        return essay;
     }
 }
