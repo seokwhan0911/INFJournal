@@ -1,10 +1,7 @@
 package com.um5th.hackerthon.infjournal.service.imp;
 
 import com.um5th.hackerthon.infjournal.apiPayload.code.EssayCode;
-import com.um5th.hackerthon.infjournal.apiPayload.code.MemberCode;
 import com.um5th.hackerthon.infjournal.apiPayload.exception.handler.EssayHandler;
-import com.um5th.hackerthon.infjournal.apiPayload.exception.handler.MemberException;
-import com.um5th.hackerthon.infjournal.controller.dto.request.LikeRequestDTO;
 import com.um5th.hackerthon.infjournal.converter.EssayLikeConverter;
 import com.um5th.hackerthon.infjournal.domain.Essay;
 import com.um5th.hackerthon.infjournal.domain.Member;
@@ -42,6 +39,13 @@ public class LikeServiceImp implements LikeService {
             essayLikeRepository.save(essayLike);
         }
         return essayLike;
-
     }
+
+    /*@Override
+    @Transactional
+    public Integer countLike(Long essayId) {
+        Essay essay = essayRepository.findById(essayId).orElseThrow(() -> new EssayHandler(EssayCode.ESSAY_NOT_FOUND));
+        System.out.println(essayLikeRepository.countByEssay(essay));
+        return essayLikeRepository.countByEssay(essay);
+    }*/
 }

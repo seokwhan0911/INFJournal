@@ -14,6 +14,7 @@ public class LikeResponseDTO {
     @AllArgsConstructor
     public static class insertLike {
         Boolean isLiked;
+        //Integer likeCnt;
     }
 
 }
