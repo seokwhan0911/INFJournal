@@ -29,9 +29,9 @@ public class LikeServiceImp implements LikeService {
 
     @Override
     @Transactional
-    public EssayLike insertLike(LikeRequestDTO.insertLike request, Long essayId) {
+    public EssayLike insertLike(Member member, Long essayId) {
         Essay essay = essayRepository.findById(essayId).orElseThrow(() -> new EssayHandler(EssayCode.ESSAY_NOT_FOUND));
-        Member member = memberRepository.findById(request.getUserId()).orElseThrow(() -> new MemberException(MemberCode.MEMBER_NOT_FOUND));
+        //Member member = memberRepository.findById(request.getUserId()).orElseThrow(() -> new MemberException(MemberCode.MEMBER_NOT_FOUND));
         EssayLike newEssayLike = EssayLikeConverter.toEssayLike(essay, member);
         return essayLikeRepository.save(newEssayLike);
     }
