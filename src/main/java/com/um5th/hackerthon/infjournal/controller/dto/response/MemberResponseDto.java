@@ -31,4 +31,19 @@ public class MemberResponseDto {
         @Schema(description = "로그인한 사용자의 아이디", example = "1")
         private Long userId;
     }
+
+    @Getter
+    @Setter
+    @AllArgsConstructor(access = AccessLevel.PROTECTED)
+    @NoArgsConstructor(access = AccessLevel.PROTECTED)
+    @Builder
+    public static class InboxEssayPreviewResponseDto {
+
+        private Long essayId;
+        private String topic;
+        private Boolean isLiked;
+        private Boolean isScraped;
+        private String likeType;
+        private String moodType;
+    }
 }
