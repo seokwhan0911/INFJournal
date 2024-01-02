@@ -8,6 +8,7 @@ import com.um5th.hackerthon.infjournal.converter.MemberConverter;
 import com.um5th.hackerthon.infjournal.domain.Member;
 import com.um5th.hackerthon.infjournal.service.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,7 @@ public class MemberController {
 
     @PostMapping("/sign-up")
     @Operation(summary = "회원 가입 API", description = "닉네임만 받아 회원가입을 진행합니다.")
+    @ApiResponse(responseCode = "201")
     public ResponseEntity<BaseResponseDto<SignUpResponseDto>> signUp(@RequestBody @Valid SignUpRequestDto request) {
         Member member = memberService.createMember(request);
 

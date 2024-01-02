@@ -1,5 +1,6 @@
 package com.um5th.hackerthon.infjournal.controller.dto.response;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,6 +17,7 @@ public class MemberResponseDto {
     @Builder
     public static class SignUpResponseDto {
 
+        @Schema(description = "생성된 사용자의 아이디", example = "1")
         private Long userId;
     }
 }
