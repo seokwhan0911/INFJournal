@@ -7,8 +7,8 @@ import org.springframework.http.HttpStatus;
 @RequiredArgsConstructor
 @Getter
 public enum MemberCode implements BaseCode {
-    USERNAME_EXISTS(HttpStatus.CONFLICT, "MEM_001", "중복된 닉네임입니다."),
-    ;
+    NICKNAME_EXISTS(HttpStatus.CONFLICT, "MEM_001", "중복된 닉네임입니다."),
+    MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, "MEM_002", "해당 사용자가 존재하지 않습니다.");
 
     private final HttpStatus httpStatus;
     private final String code;
