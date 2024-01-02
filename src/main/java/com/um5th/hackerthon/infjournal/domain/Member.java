@@ -1,5 +1,6 @@
 package com.um5th.hackerthon.infjournal.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.um5th.hackerthon.infjournal.domain.common.BaseEntity;
 import com.um5th.hackerthon.infjournal.domain.mapping.EssayLike;
 import com.um5th.hackerthon.infjournal.domain.mapping.EssayScrap;
@@ -55,4 +56,9 @@ public class Member extends BaseEntity {
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Essay> essayList = new ArrayList<>();
+
+
+    @OneToMany(mappedBy = "member")
+    @JsonIgnoreProperties  // member 필드는 JSON 직렬화에서 제외
+    private List<Essay> essays;
 }

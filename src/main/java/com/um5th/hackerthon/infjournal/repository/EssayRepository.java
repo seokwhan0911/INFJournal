@@ -8,4 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface EssayRepository extends JpaRepository<Essay, Long> {
 
     List<Essay> findAllByMember(Member member);
+    //List<Essay> findByAuthor(Member author);
 }

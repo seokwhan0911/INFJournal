@@ -33,4 +33,6 @@ public class Essay extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "topic")
     private Topic topic;
+
+
 }
