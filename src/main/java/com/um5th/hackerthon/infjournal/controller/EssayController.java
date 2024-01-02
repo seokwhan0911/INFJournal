@@ -15,8 +15,13 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.swing.text.html.parser.Entity;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -32,5 +37,24 @@ public class EssayController {
                 .status(CommonCode.CREATED.getHttpStatus())
                 .body(BaseResponseDto.of(CommonCode.CREATED, EssayConverter.toWriteResultDTO(essay)));
     }
+
+
+
+    @Operation(summary = "에세이 등록 API", description = "에세이 글쓰기 ")
+    @ApiResponse(responseCode = "201")
+    @GetMapping("/me/essays")
+    public ResponseEntity<BaseResponseDto<List<EssayResponseDTO.MyEssayDTO>>> getMyEssays(@Parameter(hidden = true) @ExtractMember Member member) {
+
+        List<Essay> listEssay = essayService.getMyEssay(member);
+
+        return ResponseEntity.status(CommonCode.OK.getHttpStatus())
+                .body(BaseResponseDto.of(EssayConverter.toMyEssayDtoList(listEssay, member)));
+
+
+    }
+
+
+
+
 
 }

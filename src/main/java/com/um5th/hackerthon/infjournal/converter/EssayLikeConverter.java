@@ -9,8 +9,7 @@ import com.um5th.hackerthon.infjournal.domain.mapping.EssayLike;
 public class EssayLikeConverter {
     public static LikeResponseDTO.insertLike toEssayLikeResDTO(EssayLike essayLike) {
         return LikeResponseDTO.insertLike.builder()
-                .createdAt(essayLike.getCreatedAt())
-                .likeId(essayLike.getId())
+                .isLiked(essayLike != null)
                 .build();
     }
 

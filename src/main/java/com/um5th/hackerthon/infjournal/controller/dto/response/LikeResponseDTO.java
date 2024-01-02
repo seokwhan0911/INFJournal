@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 
 public class LikeResponseDTO {
 
@@ -15,8 +13,8 @@ public class LikeResponseDTO {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class insertLike {
-        Long likeId;
-        LocalDateTime createdAt;
+        Boolean isLiked;
+        //Integer likeCnt;
     }
 
 }

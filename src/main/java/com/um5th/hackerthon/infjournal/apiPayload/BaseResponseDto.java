@@ -5,9 +5,12 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.um5th.hackerthon.infjournal.apiPayload.code.BaseCode;
 import com.um5th.hackerthon.infjournal.apiPayload.code.CommonCode;
+import com.um5th.hackerthon.infjournal.domain.Essay;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+
+import java.util.List;
 
 @Getter
 @AllArgsConstructor
@@ -24,6 +27,7 @@ public class BaseResponseDto<T> {
     @Schema(description = "응답 결과")
     @JsonInclude(Include.NON_NULL)
     private final T result;
+
 
     public static <T> BaseResponseDto<T> of(T result) {
         return new BaseResponseDto<>(true, CommonCode.OK.getCode(), CommonCode.OK.getMessage(), result);
