@@ -4,16 +4,29 @@ import com.um5th.hackerthon.infjournal.domain.common.BaseEntity;
 import com.um5th.hackerthon.infjournal.domain.mapping.EssayLike;
 import com.um5th.hackerthon.infjournal.domain.mapping.EssayScrap;
 import com.um5th.hackerthon.infjournal.domain.mapping.Inbox;
-import jakarta.persistence.*;
-import lombok.*;
+import com.um5th.hackerthon.infjournal.domain.mapping.TodayTopic;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import java.util.ArrayList;
+import java.util.List;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
 @Getter
+@Setter
 @DynamicUpdate
 @DynamicInsert
 @Builder
@@ -27,6 +40,9 @@ public class Member extends BaseEntity {
 
     @Column(nullable = false, length = 50)
     private String nickname;
+
+    @OneToOne(mappedBy = "member", cascade = CascadeType.ALL)
+    private TodayTopic todayTopic;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<EssayScrap> essayScrapList = new ArrayList<>();
