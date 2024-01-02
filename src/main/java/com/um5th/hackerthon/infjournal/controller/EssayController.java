@@ -12,25 +12,32 @@ import com.um5th.hackerthon.infjournal.service.EssayService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
+@Tag(name = "Essay", description = "에세이 관련 API")
 public class EssayController {
+
     private final EssayService essayService;
+
     @Operation(summary = "에세이 등록 API", description = "에세이 글쓰기 ")
     @ApiResponse(responseCode = "201")
     @PostMapping("/essays")
-    public ResponseEntity<BaseResponseDto<EssayResponseDTO.WriteEssayDTO>> write(@RequestBody @Valid EssayRequestDTO.EssayDto request, @Parameter(hidden = true) @ExtractMember Member member){
+    public ResponseEntity<BaseResponseDto<EssayResponseDTO.WriteEssayDTO>> write(@RequestBody @Valid EssayRequestDTO.EssayDto request,
+        @Parameter(hidden = true) @ExtractMember Member member) {
         Essay essay = essayService.writeEssay(request, member);
         return ResponseEntity
-                .status(CommonCode.CREATED.getHttpStatus())
-                .body(BaseResponseDto.of(CommonCode.CREATED, EssayConverter.toWriteResultDTO(essay)));
+            .status(CommonCode.CREATED.getHttpStatus())
+            .body(BaseResponseDto.of(CommonCode.CREATED, EssayConverter.toWriteResultDTO(essay)));
     }
 
 }

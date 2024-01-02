@@ -39,11 +39,22 @@ public class MemberResponseDto {
     @Builder
     public static class InboxEssayPreviewResponseDto {
 
+        @Schema(description = "에세이 아이디", example = "1")
         private Long essayId;
+
+        @Schema(description = "주제", example = "오늘의 주제입니다.")
         private String topic;
+
+        @Schema(description = "좋아요 여부", example = "true")
         private Boolean isLiked;
+
+        @Schema(description = "스크랩 여부", example = "true")
         private Boolean isScraped;
+
+        @Schema(description = "좋아요 타입", allowableValues = {"HEART"})
         private String likeType;
+
+        @Schema(description = "무드 타입", allowableValues = {"HAPPY", "SAD", "ANGRY", "BOMB", "NERVOUS", "LOVE", "SICK"})
         private String moodType;
     }
 }

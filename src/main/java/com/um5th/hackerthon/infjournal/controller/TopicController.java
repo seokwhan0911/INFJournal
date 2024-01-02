@@ -8,6 +8,7 @@ import com.um5th.hackerthon.infjournal.converter.TopicConverter;
 import com.um5th.hackerthon.infjournal.domain.Member;
 import com.um5th.hackerthon.infjournal.domain.mapping.TodayTopic;
 import com.um5th.hackerthon.infjournal.service.TopicService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -19,12 +20,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/topics")
-@Tag(name = "토픽 관련 API")
+@Tag(name = "Topic", description = "토픽 관련 API")
 public class TopicController {
 
     private final TopicService topicService;
 
     @GetMapping("/today")
+    @Operation(summary = "오늘의 주제 조회 API", description = "오늘의 주제를 조회합니다.")
     public ResponseEntity<BaseResponseDto<TodayTopicResponseDto>> getTodayTopic(@Parameter(hidden = true) @ExtractMember Member member) {
         TodayTopic todayTopic = topicService.getTodayTopic(member);
 
