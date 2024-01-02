@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -37,5 +38,21 @@ public class EssayConverter {
                 .topic(topic)
                 .member(member)
                 .build();
+    }
+
+    private static EssayResponseDTO.MyEssayDTO myEssayDTO(Essay essay, Member member){
+
+        return EssayResponseDTO.MyEssayDTO.builder()
+                .essayId(essay.getId())
+                .topicId(essay.getTopic().getId())
+                .title(essay.getTitle())
+                .contents(essay.getContents())
+                .moodType(String.valueOf(essay.getMoodType()))
+//                .likeCnt(likeCnt)
+                .build();
+    }
+
+    public static List<EssayResponseDTO.MyEssayDTO> toMyEssayDtoList(List<Essay> essays, Member member) {
+        return essays.stream().map(essay -> myEssayDTO(essay, member)).toList();
     }
 }
