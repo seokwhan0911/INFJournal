@@ -15,9 +15,13 @@ import lombok.Getter;
 @Schema(description = "기본 응답")
 public class BaseResponseDto<T> {
 
+    @Schema(description = "요청 성공 여부", example = "true")
     private final Boolean isSuccess;
+    @Schema(description = "서버 커스텀 코드 (Http 상태 코드 ❌)", example = "COMM_001")
     private final String code;
+    @Schema(description = "응답 메시지", example = "요청 성공")
     private final String message;
+    @Schema(description = "응답 결과")
     @JsonInclude(Include.NON_NULL)
     private final T result;
 
