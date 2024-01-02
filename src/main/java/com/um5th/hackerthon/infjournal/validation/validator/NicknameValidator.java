@@ -25,7 +25,7 @@ public class NicknameValidator implements ConstraintValidator<ValidateNickname, 
 
         if (!isValid) {
             constraintValidatorContext.disableDefaultConstraintViolation();
-            constraintValidatorContext.buildConstraintViolationWithTemplate(MemberCode.USERNAME_EXISTS.toString()).addConstraintViolation();
+            constraintValidatorContext.buildConstraintViolationWithTemplate(MemberCode.NICKNAME_EXISTS.toString()).addConstraintViolation();
         }
 
         return isValid;
