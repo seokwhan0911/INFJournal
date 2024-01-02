@@ -27,7 +27,7 @@ public class EssayResponseDTO {
         String title;
         String contents;
         String moodType;
-        //Integer likeCnt;
+        Integer likeCnt;
     }
 
 
