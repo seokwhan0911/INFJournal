@@ -1,7 +1,9 @@
 package com.um5th.hackerthon.infjournal.service.imp;
 
 import com.um5th.hackerthon.infjournal.apiPayload.code.EssayCode;
+import com.um5th.hackerthon.infjournal.apiPayload.code.MemberCode;
 import com.um5th.hackerthon.infjournal.apiPayload.exception.handler.EssayHandler;
+import com.um5th.hackerthon.infjournal.apiPayload.exception.handler.MemberException;
 import com.um5th.hackerthon.infjournal.controller.dto.request.LikeRequestDTO;
 import com.um5th.hackerthon.infjournal.converter.EssayLikeConverter;
 import com.um5th.hackerthon.infjournal.domain.Essay;
@@ -29,7 +31,7 @@ public class LikeServiceImp implements LikeService {
     @Transactional
     public EssayLike insertLike(LikeRequestDTO.insertLike request, Long essayId) {
         Essay essay = essayRepository.findById(essayId).orElseThrow(() -> new EssayHandler(EssayCode.ESSAY_NOT_FOUND));
-        Member member = memberRepository.findById(request.getUserId()).orElseThrow(() -> new Member)
+        Member member = memberRepository.findById(request.getUserId()).orElseThrow(() -> new MemberException(MemberCode.MEMBER_NOT_FOUND));
         EssayLike newEssayLike = EssayLikeConverter.toEssayLike(essay, member);
         return essayLikeRepository.save(newEssayLike);
     }
