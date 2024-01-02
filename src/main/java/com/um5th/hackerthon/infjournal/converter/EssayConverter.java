@@ -48,7 +48,7 @@ public class EssayConverter {
                 .title(essay.getTitle())
                 .contents(essay.getContents())
                 .moodType(String.valueOf(essay.getMoodType()))
-//                .likeCnt(likeCnt)
+                .likeCnt(essay.getEssayLikes().size())
                 .build();
     }
 
