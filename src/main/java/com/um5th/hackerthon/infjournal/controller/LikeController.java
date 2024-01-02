@@ -3,7 +3,6 @@ package com.um5th.hackerthon.infjournal.controller;
 import com.um5th.hackerthon.infjournal.annotation.ExtractMember;
 import com.um5th.hackerthon.infjournal.apiPayload.BaseResponseDto;
 import com.um5th.hackerthon.infjournal.apiPayload.code.CommonCode;
-import com.um5th.hackerthon.infjournal.controller.dto.request.LikeRequestDTO;
 import com.um5th.hackerthon.infjournal.controller.dto.response.LikeResponseDTO;
 import com.um5th.hackerthon.infjournal.converter.EssayLikeConverter;
 import com.um5th.hackerthon.infjournal.domain.Member;
