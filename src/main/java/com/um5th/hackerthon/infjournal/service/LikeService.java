@@ -5,4 +5,6 @@ import com.um5th.hackerthon.infjournal.domain.mapping.EssayLike;
 
 public interface LikeService {
     EssayLike insertLike(Member member, Long essayId);
+
+    //Integer countLike(Long essayId);
 }

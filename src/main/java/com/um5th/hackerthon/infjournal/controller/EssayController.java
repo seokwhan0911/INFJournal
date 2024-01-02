@@ -8,16 +8,15 @@ import com.um5th.hackerthon.infjournal.controller.dto.response.EssayResponseDTO;
 import com.um5th.hackerthon.infjournal.converter.EssayConverter;
 import com.um5th.hackerthon.infjournal.domain.Essay;
 import com.um5th.hackerthon.infjournal.domain.Member;
-import com.um5th.hackerthon.infjournal.domain.common.BaseEntity;
 import com.um5th.hackerthon.infjournal.service.EssayService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -41,4 +40,23 @@ public class EssayController {
         return ResponseEntity.status(CommonCode.OK.getHttpStatus())
                 .body(BaseResponseDto.of(CommonCode.OK, EssayConverter.toReadEssayResDTO(essay)));
     }
+
+
+    @Operation(summary = "에세이 등록 API", description = "에세이 글쓰기 ")
+    @ApiResponse(responseCode = "201")
+    @GetMapping("/me/essays")
+    public ResponseEntity<BaseResponseDto<List<EssayResponseDTO.MyEssayDTO>>> getMyEssays(@Parameter(hidden = true) @ExtractMember Member member) {
+
+        List<Essay> listEssay = essayService.getMyEssay(member);
+
+        return ResponseEntity.status(CommonCode.OK.getHttpStatus())
+                .body(BaseResponseDto.of(EssayConverter.toMyEssayDtoList(listEssay, member)));
+
+
+    }
+
+
+
+
+
 }
