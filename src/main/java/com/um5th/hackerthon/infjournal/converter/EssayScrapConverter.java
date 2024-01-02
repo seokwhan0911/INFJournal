@@ -15,11 +15,11 @@ public class EssayScrapConverter {
     public static EssayScrapResponseDTO.AddResultEssayScrapDto toAddResultEssayScrapDto(EssayScrap essayScrap, Member member){
 
         return EssayScrapResponseDTO.AddResultEssayScrapDto.builder()
-                .scrapId(essayScrap.getId())
+                .isScrap(essayScrap != null)
                 .build();
     }
 
-    public static EssayScrap toEssayScrap(EssayScrapRequestDTO.AddEssayScrapDto request, Essay essay, Member member){
+    public static EssayScrap toEssayScrap(Essay essay, Member member){
         return EssayScrap.builder()
                 .essay(essay)
                 .member(member)

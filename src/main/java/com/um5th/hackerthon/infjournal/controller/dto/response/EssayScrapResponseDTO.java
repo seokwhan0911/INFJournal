@@ -20,7 +20,8 @@ public class EssayScrapResponseDTO {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class AddResultEssayScrapDto{
-        Long scrapId;
+//        Long scrapId;
+        Boolean isScrap;
     }
 
 }

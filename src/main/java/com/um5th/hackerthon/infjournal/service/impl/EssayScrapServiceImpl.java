@@ -1,6 +1,7 @@
 package com.um5th.hackerthon.infjournal.service.impl;
 
 import com.um5th.hackerthon.infjournal.controller.dto.request.EssayScrapRequestDTO;
+import com.um5th.hackerthon.infjournal.converter.EssayLikeConverter;
 import com.um5th.hackerthon.infjournal.converter.EssayScrapConverter;
 import com.um5th.hackerthon.infjournal.domain.Essay;
 import com.um5th.hackerthon.infjournal.domain.Member;
@@ -23,8 +24,20 @@ public class EssayScrapServiceImpl implements EssayScrapService {
     @Transactional
     public EssayScrap addScrap(EssayScrapRequestDTO.AddEssayScrapDto request, Member member){
         Essay essay = essayRepository.findById(request.getEssayId()).orElseThrow(() -> new RuntimeException());
-        EssayScrap newScrap = EssayScrapConverter.toEssayScrap(request, essay, member);
-        return essayScrapRepository.save(newScrap);
+       // EssayScrap newScrap = EssayScrapConverter.toEssayScrap(request, essay, member);
+        EssayScrap essayScrap = essayScrapRepository.findByMemberAndEssay(member, essay);
+
+        if (essayScrap != null) {
+            essayScrapRepository.delete(essayScrap);
+            essayScrap = null;
+        }
+
+        else {
+            essayScrap = EssayScrapConverter.toEssayScrap(essay, member);
+            essayScrapRepository.save(essayScrap);
+        }
+        return essayScrap;
+        //return essayScrapRepository.save(newScrap);
     }
 
 }
